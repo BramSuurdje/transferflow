@@ -1,4 +1,4 @@
-export const MAX_FILE_SIZE_BYTES = 500 * 1024 * 1024
+export const MAX_FILE_SIZE_BYTES = 2 * 1024 * 1024 * 1024
 
 /** S3 multipart object maximum; used when internal API key bypass is active. */
 export const INTERNAL_MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024 * 1024 * 1024
@@ -91,47 +91,6 @@ export type SharePublic = {
   expiresAt: number
 }
 
-const BLOCKED_EXTENSIONS = new Set([
-  "exe",
-  "msi",
-  "dmg",
-  "pkg",
-  "app",
-  "bat",
-  "cmd",
-  "com",
-  "scr",
-  "ps1",
-  "sh",
-  "bash",
-  "apk",
-  "jar",
-  "deb",
-  "rpm",
-  "run",
-  "bin",
-  "dll",
-  "sys",
-  "vbs",
-  "js",
-  "mjs",
-  "cjs",
-  "wsf",
-  "hta",
-  "inf",
-  "reg",
-])
-
-const BLOCKED_CONTENT_TYPE_PREFIXES = [
-  "application/x-msdownload",
-  "application/x-msdos-program",
-  "application/x-executable",
-  "application/x-sh",
-  "application/x-bat",
-  "application/vnd.microsoft.portable-executable",
-  "application/java-archive",
-]
-
 export function objectKeyForShare(id: string): string {
   return `shares/${id}`
 }
@@ -145,19 +104,6 @@ export function retentionExpiresAt(
   fromMs = Date.now()
 ): number {
   return fromMs + RETENTION_SECONDS[retention] * 1000
-}
-
-export function isBlockedFile(filename: string, contentType: string): boolean {
-  const extension = filename.split(".").pop()?.toLowerCase() ?? ""
-  if (BLOCKED_EXTENSIONS.has(extension)) {
-    return true
-  }
-
-  const normalizedType = contentType.split(";")[0]?.trim().toLowerCase() ?? ""
-  return BLOCKED_CONTENT_TYPE_PREFIXES.some(
-    (prefix) =>
-      normalizedType === prefix || normalizedType.startsWith(`${prefix}/`)
-  )
 }
 
 export function toPublicShare(record: ShareRecord): SharePublic {

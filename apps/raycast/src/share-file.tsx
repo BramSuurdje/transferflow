@@ -6,7 +6,6 @@ import { createApiClient } from "./lib/api"
 import {
   INTERNAL_MAX_FILE_SIZE_BYTES,
   MAX_FILE_SIZE_BYTES,
-  isBlockedFile,
 } from "@transferflow/shared"
 import { getFinderSelection } from "./lib/finder"
 import { getPreferences, sharePageUrl } from "./lib/preferences"
@@ -48,12 +47,8 @@ export default async function Command() {
       throw new Error(
         internalApiKey
           ? "File exceeds the maximum upload size"
-          : "File exceeds the 500 MB limit"
+          : "File exceeds the 2 GB limit"
       )
-    }
-
-    if (isBlockedFile(file.name, contentType)) {
-      throw new Error("This file type is not allowed")
     }
 
     toast.title = `Uploading ${basename(file.path)}…`

@@ -178,7 +178,7 @@ export function HomePage() {
                 </div>
                 <p className="text-sm font-medium">Drop a file here</p>
                 <p className="text-xs text-muted-foreground">
-                  Any file up to 500 MB. No apps, scripts, or installers.
+                  Any file up to 2 GB.
                 </p>
                 <FileUploadTrigger asChild>
                   <Button variant="outline" type="button" size="sm">

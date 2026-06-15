@@ -2,7 +2,6 @@ import { zValidator } from "@hono/zod-validator"
 import { createId } from "@paralleldrive/cuid2"
 import {
   INTERNAL_MAX_FILE_SIZE_BYTES,
-  isBlockedFile,
   MAX_FILE_SIZE_BYTES,
   RETENTION_OPTIONS,
 } from "@transferflow/shared"
@@ -52,10 +51,6 @@ export const sharesRoutes = new Hono()
       return c.json({ error: "Invalid request body" }, 400)
     }
     const body = parsed.data
-
-    if (isBlockedFile(body.filename, body.contentType)) {
-      return c.json({ error: "File type is not allowed" }, 400)
-    }
 
     const id = createId()
     const createdAt = Date.now()

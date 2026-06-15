@@ -8,7 +8,7 @@ Built as a TypeScript monorepo to practice real-world patterns—presigned objec
 
 ## What it does
 
-Someone lands on the home page, drops a file (up to 500 MB), and chooses **24 hours** or **7 days** retention. The app uploads the file, then sends them to a download page—the same page recipients see when they open the share link.
+Someone lands on the home page, drops a file (up to 2 GB), and chooses **24 hours** or **7 days** retention. The app uploads the file, then sends them to a download page—the same page recipients see when they open the share link.
 
 Recipients get a simple page with the file name, size, and time left. They click **Download** to fetch the file; nothing auto-downloads on page load. When retention ends, the file and its metadata are removed automatically.
 

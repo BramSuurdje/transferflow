@@ -17,7 +17,7 @@ How long a Share stays available before it is deleted. Exactly two options: 24 h
 _Avoid_: TTL, expiry (use in code; prefer Retention in product language)
 
 **Size limit**:
-Maximum file size per Share. Fixed at 500 MB; enforced when creating a Share, before presigned upload.
+Maximum file size per Share. Fixed at 2 GB; enforced when creating a Share, before presigned upload.
 _Avoid_: Quota, cap (fine in API errors)
 
 **API**:
@@ -48,8 +48,8 @@ _Avoid_: Rate limiting (not applicable in v1)
 After a successful upload, the uploader is redirected to the **Download page** for that Share—the same view recipients will see.
 _Avoid_: Success screen, confirmation page
 
-**Blocked file types**:
-Executables and installable/script types are rejected at Share creation (extension and declared content type). All other types are allowed within the **Size limit**.
+**Allowed file types**:
+All file types are allowed within the **Size limit**.
 _Avoid_: Allowlist, MIME whitelist
 
 **Web app** / **API** (deployment):
@@ -92,11 +92,11 @@ _Avoid_: Revoke, unpublish
 ## Resolved decisions
 
 - One file per **Share**; a new upload always means a new **Share link**
-- Each Share’s file must be ≤ **Size limit** (500 MB)
+- Each Share’s file must be ≤ **Size limit** (2 GB)
 - **Expiry worker**: keyspace notifications first; ZSET + interval sweeper if Railway Redis blocks `notify-keyspace-events`
 - Incomplete uploads use a short-lived pending key (e.g. 1 hour) so abandoned presigns do not fill the bucket
 - No upload rate limits in v1
-- **Blocked file types** enforced before presigned **Upload** is issued
+- All file types are allowed before presigned **Upload** is issued
 - **Web app** and **API** are different origins in production; local dev uses Vite proxy to the API
 - **Download action** mints a presigned URL on demand; metadata fetch does not include a download URL
 - **Deletion** is automatic via **Expiry** only; no uploader delete in v1
