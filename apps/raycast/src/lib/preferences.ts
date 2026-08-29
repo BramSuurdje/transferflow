@@ -55,15 +55,14 @@ export function apiUrlForWebOrigin(webUrl: string): string {
   const origin = webUrl.replace(/\/$/, "")
 
   try {
-    const { hostname } = new URL(origin)
-    if (hostname === "localhost" || hostname === "127.0.0.1") {
+    const url = new URL(origin)
+    if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
       return "http://localhost:3001"
     }
+    return `${url.protocol}//api.${url.host}`
   } catch {
-    // Invalid URL; fall through to /api suffix.
+    return origin
   }
-
-  return `${origin}/api`
 }
 
 export function getPreferences(): Preferences {

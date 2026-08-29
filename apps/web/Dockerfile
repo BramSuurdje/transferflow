@@ -24,8 +24,10 @@ COPY apps/web ./apps/web
 COPY packages/shared ./packages/shared
 COPY packages/ui ./packages/ui
 
-# Same-origin API via nginx in production; leave empty for relative /shares paths.
-ARG VITE_API_URL=
+# Browser-facing API origin, baked in at build time.
+# Local compose: http://localhost:3001
+# Production:    https://api.toss.bramsuurd.nl
+ARG VITE_API_URL=http://localhost:3001
 ENV VITE_API_URL=${VITE_API_URL}
 RUN cd apps/web && bun run build
 

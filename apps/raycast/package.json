@@ -33,7 +33,7 @@
       "type": "textfield",
       "required": true,
       "title": "Web App URL",
-      "description": "Toss site URL (no trailing slash). Optional internal bypass: append ?k=your-key. API calls use /api on this host, or localhost:3001 when developing locally.",
+      "description": "Toss site URL (no trailing slash). Optional internal bypass: append ?k=your-key. API is api.<host>, or localhost:3001 when developing locally.",
       "default": "https://toss.bramsuurd.nl",
       "placeholder": "https://toss.bramsuurd.nl"
     },

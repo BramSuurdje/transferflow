@@ -1,9 +1,11 @@
-# Toss — deploy as two Railway services from this repo:
-# 1. API  - root directory apps/api,  start: bun run start
-# 2. Web  - root directory apps/web,  build: bun run build, start: bun run start (serve -s for SPA routes)
+# Toss — deploy web and API as two services from this repo (Railway or Coolify).
+# See README for Coolify Dockerfile paths, ports, env vars, and Nixpacks commands.
 #
-# Add Redis and a bucket (S3-compatible) in the same Railway project.
+# 1. API  - Dockerfile apps/api/Dockerfile,  start: bun run start, port 3001
+# 2. Web  - Dockerfile apps/web/Dockerfile,  build: bun run build, start: bun run start
+#
+# Add Redis and S3-compatible storage.
 # Wire REDIS_URL and S3_* env vars on the API service.
-# API service:  WEB_ORIGIN=https://transferflow.bramsuurd.nl
-# Web service:  VITE_API_URL=https://api.transferflow.bramsuurd.nl  (rebuild after changing)
-# After first deploy: cd apps/api && railway run --service api bun run configure-cors
+# API:  WEB_ORIGIN=https://toss.bramsuurd.nl
+# Web:  VITE_API_URL=https://api.toss.bramsuurd.nl  (rebuild after changing)
+# After first deploy: cd apps/api && bun run configure-cors

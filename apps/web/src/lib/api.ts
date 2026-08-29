@@ -3,7 +3,7 @@ import { INTERNAL_API_KEY_HEADER } from "@transferflow/shared"
 
 import { getInternalKey } from "@/lib/internal-key"
 
-const API_BASE = import.meta.env.VITE_API_URL ?? ""
+const API_BASE = (import.meta.env.VITE_API_URL ?? "").replace(/\/+$/, "")
 
 function apiHeaders(extra?: HeadersInit): HeadersInit {
   const headers = new Headers(extra)

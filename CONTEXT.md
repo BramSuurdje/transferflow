@@ -53,7 +53,7 @@ All file types are allowed within the **Size limit**.
 _Avoid_: Allowlist, MIME whitelist
 
 **Web app** / **API** (deployment):
-Separate Railway services on separate public hostnames (e.g. `app.*` and `api.*`). Share links live on the **Web app** origin (`/d/{cuid}`). The browser calls the **API** cross-origin with CORS.
+Separate services on separate public hostnames (`toss.bramsuurd.nl` and `api.toss.bramsuurd.nl`). Share links live on the **Web app** origin (`/d/{cuid}`). The browser calls the **API** cross-origin with CORS.
 _Avoid_: Frontend, backend (fine in repo paths)
 
 **Download action**:
@@ -97,6 +97,6 @@ _Avoid_: Revoke, unpublish
 - Incomplete uploads use a short-lived pending key (e.g. 1 hour) so abandoned presigns do not fill the bucket
 - No upload rate limits in v1
 - All file types are allowed before presigned **Upload** is issued
-- **Web app** and **API** are different origins in production; local dev uses Vite proxy to the API
+- **Web app** and **API** are different origins in production (`toss.*` / `api.toss.*`); local `bun run dev` uses the Vite proxy to the API
 - **Download action** mints a presigned URL on demand; metadata fetch does not include a download URL
 - **Deletion** is automatic via **Expiry** only; no uploader delete in v1

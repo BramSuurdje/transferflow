@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: apps/web/Dockerfile
       args:
-        VITE_API_URL: ${VITE_API_URL:-}
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:3001}
     ports:
       # 0.0.0.0 so a remote Caddy on your LAN can reach this host. Use 127.0.0.1 if Caddy is local.
       - "${WEB_HOST:-0.0.0.0}:${WEB_PORT:-8080}:8080"
@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     environment:
-      # Fixed in-container port (healthcheck, web nginx proxy, and API_PORT host mapping).
+      # Fixed in-container port (healthcheck and API_PORT host mapping).
       PORT: 3001
       # Container-to-container: always port 6379 on the redis service.
       # REDIS_PORT in .env only changes the host-published port, not this URL.

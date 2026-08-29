@@ -1,22 +1,18 @@
-# Example: Caddy on the same host as `docker compose`.
+# Example: Caddy on the same host as `docker compose`, two public hostnames.
 # Copy to /etc/caddy/Caddyfile (or import from your site block).
 #
 # Prerequisites:
 # - Toss runs on e.g. 10.0.0.5 with WEB_HOST/API_HOST=0.0.0.0 (not 127.0.0.1) when Caddy is remote
 # - Compose publishes web :8393 and api :8394 on that host
-# - Web image built with VITE_API_URL=/api
-# - API .env: WEB_ORIGIN=https://toss.bramsuurd.nl
+# - Web image built with VITE_API_URL=https://api.toss.bramsuurd.nl
+# - API: WEB_ORIGIN=https://toss.bramsuurd.nl
 
 toss.bramsuurd.nl {
 	encode gzip
+	reverse_proxy 10.0.0.5:8393
+}
 
-	# /api/health -> api:3001/health, /api/shares -> api:3001/shares
-	handle_path /api/* {
-		reverse_proxy 10.0.0.5:8394
-	}
-
-	# SPA (static files from the web container)
-	handle {
-		reverse_proxy 10.0.0.5:8393
-	}
+api.toss.bramsuurd.nl {
+	encode gzip
+	reverse_proxy 10.0.0.5:8394
 }

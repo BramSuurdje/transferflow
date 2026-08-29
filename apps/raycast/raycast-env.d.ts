@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 type ExtensionPreferences = {
-  /** Web App URL - Toss site URL (no trailing slash). Optional internal bypass: append ?k=your-key. API calls use /api on this host, or localhost:3001 when developing locally. */
+  /** Web App URL - Toss site URL (no trailing slash). Optional internal bypass: append ?k=your-key. API is api.<host>, or localhost:3001 when developing locally. */
   "webUrl": string,
   /** Link validity - How long the share link stays available */
   "retention": "15m" | "30m" | "1h" | "3h" | "12h" | "24h" | "3d" | "7d"

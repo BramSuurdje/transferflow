@@ -20,7 +20,7 @@ Upload the file selected in Finder to Toss and copy the share link to your clipb
 3. Open Raycast and run **Share File**.
 
 4. In Raycast → Extensions → Toss → Preferences, set:
-   - **Web App URL** — `https://toss.bramsuurd.nl` (production) or `http://localhost:5173` (local dev). The API URL is derived automatically (`/api` in production, port `3001` locally). For unlimited uploads, append `?k=<INTERNAL_API_KEY>` to this URL (the query param is stripped from copied share links).
+   - **Web App URL** — `https://toss.bramsuurd.nl` (production) or `http://localhost:5173` (local dev). The API URL is derived automatically (`https://api.<web-host>` in production, port `3001` locally). For unlimited uploads, append `?k=<INTERNAL_API_KEY>` to this URL (the query param is stripped from copied share links).
    - **Link validity** — default retention for uploads
 
 ## Usage
